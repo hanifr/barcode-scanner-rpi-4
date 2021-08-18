@@ -9,21 +9,12 @@ sudo raspi-config
 
  ## 1 - Execute Main script
 ```
-git clone https://github.com/hanifr/dragino-GPS-RPi-shield.git
-cd dragino-GPS-RPi-shield
+git clone https://github.com/hanifr/barcode-scanner-rpi-4.git
+cd barcode-scanner-rpi-4
 ./init.sh
 ```
-## 2 - Disable HCIUART
-```
-./hciuartdisable.sh
-```
 
-## 4 - Optional: Run GPS and LoRa services on boot
+## 2 - Optional: Run Barcode Scanner service on boot
 ```
 ./startup.sh
-```
-
-## 5 - Optional: Run Node-red on boot
-```
-./initnodered.sh
 ```

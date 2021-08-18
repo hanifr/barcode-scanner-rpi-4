@@ -82,7 +82,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         dev.close()
 EOL
-sudo mv /tmp/barcodescanner.py /home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/barcodescanner.py
+sudo mv /tmp/barcodescanner.py /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/barcodescanner.py
 
 sleep 5
 echo

@@ -16,38 +16,37 @@ echo
 sudo cat >/tmp/startbarscan.sh <<EOL
 #!/bin/bash
 
-# cd /home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/
-sudo python3 /home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/gps_simple.py
+# cd /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/
+sudo python3 /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/barcodescanner.py
 
 EOL
-sudo mv /tmp/startbarscan.sh /home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/startbarscan.sh
-sudo chmod 744 /home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/startbarscan.sh
+sudo mv /tmp/startbarscan.sh /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
+sudo chmod 744 /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
 
 
-sudo cat >/tmp/gpsdragino.service <<EOL
+sudo cat >/tmp/netumscan.service <<EOL
 [Unit]
-Description=GPS module service
-Wants=network.target
-After=loradragino.service
+Description=Barcode Scanner module service
+After=network.target
 StartLimitInterval=400
 StartLimitBurst=3
 [Service]
 Type=simple
-ExecStart=/home/pi/dragino-GPS-RPi-shield/paho.mqtt.python/examples/startbarscan.sh
+ExecStart=/home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
 Restart=on-failure
 RestartSec=90
 User=pi
 [Install]
 WantedBy=multi-user.target
 EOL
-sudo mv /tmp/gpsdragino.service /etc/systemd/system/gpsdragino.service
-echo "${_YELLOW}[*] Starting gpsdragino systemd service${_RESET}"
-sudo chmod 664 /etc/systemd/system/gpsdragino.service
+sudo mv /tmp/netumscan.service /etc/systemd/system/netumscan.service
+echo "${_YELLOW}[*] Starting netumscan systemd service${_RESET}"
+sudo chmod 664 /etc/systemd/system/netumscan.service
 sudo systemctl daemon-reload
-sudo systemctl enable gpsdragino.service
-sudo systemctl start gpsdragino.service
+sudo systemctl enable netumscan.service
+sudo systemctl start netumscan.service
 
-echo "${_YELLOW}To see GPS startup service logs run \"sudo journalctl -u loradragino -f\" command${_RESET}"
+echo "${_YELLOW}To see GPS startup service logs run \"sudo journalctl -u netumscan -f\" command${_RESET}"
 echo
 echo "${_MAGENTA}Setup Progress....Creating Barcode Scanner startup service:: finished${_RESET}"
 echo
