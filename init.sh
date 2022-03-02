@@ -43,6 +43,7 @@ echo "[*] Creating Barcode Scanner data acquisition script"
 
 cat >/tmp/barcodescanner.py <<EOL
 #!/usr/bin/env python3
+import context  # Ensures paho is in PYTHONPATH
 import paho.mqtt.publish as publish
 from evdev import InputDevice, ecodes, list_devices, categorize
 import signal, sys

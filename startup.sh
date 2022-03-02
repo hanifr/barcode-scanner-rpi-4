@@ -16,23 +16,21 @@ echo
 sudo cat >/tmp/startbarscan.sh <<EOL
 #!/bin/bash
 
-# cd /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/
 sudo python3 /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/barcodescanner.py
 
 EOL
-sudo mv /tmp/startbarscan.sh /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
-sudo chmod 744 /home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
+sudo mv /tmp/startbarscan.sh /home/pi/startbarscan.sh
+sudo chmod 744 /home/pi/startbarscan.sh
 
 
 sudo cat >/tmp/netumscan.service <<EOL
 [Unit]
 Description=Barcode Scanner module service
-After=network.target
-StartLimitInterval=400
-StartLimitBurst=3
+After=syslog.target network.target
 [Service]
 Type=simple
-ExecStart=/home/pi/barcode-scanner-rpi-4/paho.mqtt.python/examples/startbarscan.sh
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/startbarscan.sh
 Restart=on-failure
 RestartSec=90
 User=pi
